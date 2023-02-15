@@ -1,6 +1,8 @@
 from moviepy.editor import *
 import os
+from config import setting
 
+setting = setting()
 print("What is your file name including extension in the 'in' folder?")
 name = input()
 name = name.strip()
@@ -15,7 +17,7 @@ except:
     print("folder already exists")
 clipDuration = masterclip.duration
 clipStart = 0
-clipend = 30
+clipend = setting.clipLength
 clipNum = 0
 
 while clipend < clipDuration:
@@ -23,8 +25,8 @@ while clipend < clipDuration:
     clip.write_videofile("./out/{0}/{1}.mp4".format(clipName,clipNum))
 
     clipNum = clipNum +1
-    clipStart = clipStart + 30
-    clipend = clipend + 30
+    clipStart = clipStart + setting.clipLength
+    clipend = clipend + setting.clipLength
 
 clip = masterclip.subclip(clipStart)
 clip.write_videofile("./out/{0}/{1}.mp4".format(clipName,clipNum))
